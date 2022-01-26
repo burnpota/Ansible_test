@@ -1,0 +1,4 @@
+- name: changing fsck in /etc/fstab
+  shell:
+     cmd: sed -i '/xfs/s/0 0/0 2/g' /etc/fstab ; sed -i '/ \/ /s/0 2/0 1/g' /etc/fstab
+     warn: false

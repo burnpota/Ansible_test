@@ -1,0 +1,12 @@
+- block:
+     - name: accounting of sa1 every 1 minute
+       lineinfile:
+          path: /etc/cron.d/sysstat
+          regexp: '/usr/lib64/sa/sa1 1 1$'
+          line: '*/1 * * * * root /usr/lib64/sa/sa1 1 1'
+
+     - name: history changing
+       lineinfile:
+          path: /etc/sysconfig/sysstat
+          regexp: '^HISTORY='
+          line: 'HISTORY=90'

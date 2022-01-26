@@ -1,0 +1,5 @@
+- name: rc.local
+  template:
+     src: templates/rc.local.j2
+     dest: /etc/rc.d/rc.local
+     mode: 0750

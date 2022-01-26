@@ -1,0 +1,32 @@
+- name: pam.d config
+  block:
+
+     - lineinfile:
+          path: /etc/pam.d/su
+          regexp: '^auth            sufficient'
+          line: 'auth            sufficient      pam_rootok.so  debug'
+
+
+     - lineinfile:
+          path: /etc/pam.d/password-auth
+          backrefs: yes
+          regexp: 'auth        required      pam_faildelay.so delay=2000000'
+          line: 'auth        required      pam_tally2.so deny=4 unlock_time=1800'
+
+     - lineinfile:
+          path: /etc/pam.d/password-auth
+          regexp: 'account     required      pam_tally2.so'
+          insertbefore: 'account     required      pam_unix.so'
+          line: 'account     required      pam_tally2.so'
+
+     - lineinfile:
+          path: /etc/pam.d/system-auth
+          backrefs: yes
+          regexp: 'auth        required      pam_faildelay.so delay=2000000'
+          line: 'auth        required      pam_tally2.so deny=4 unlock_time=1800'
+
+     - lineinfile:
+          path: /etc/pam.d/system-auth
+          regexp: 'account     required      pam_tally2.so'
+          insertbefore: 'account     required      pam_unix.so'
+          line: 'account     required      pam_tally2.so'

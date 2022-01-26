@@ -1,0 +1,8 @@
+---
+- name: test
+  hosts: testserver
+  tasks:
+
+     - debug:
+         msg: "hehe"
+       when: '"vg9" not in ansible_lvm.vgs'

@@ -1,0 +1,14 @@
+- name: sshd config
+  block:
+
+     - lineinfile:
+          path: /etc/ssh/sshd_config
+          regexp: '^UseDNS'
+          insertafter: '^#UseDNS'
+          line: 'UseDNS no'
+
+     - lineinfile:
+          path: /etc/ssh/sshd_config
+          regexp: '^Banner'
+          insertafter: '^#Banner'
+          line: 'Banner /etc/motd'

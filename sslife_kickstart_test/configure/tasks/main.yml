@@ -1,0 +1,24 @@
+- include_tasks: tasks/02-yum-repository.yml
+- include_tasks: "tasks/03-systemd_{{ bool_phy }}.yml"
+- include_tasks: "tasks/04-cmdline_{{ sys_vendor }}.yml"
+- include_tasks: tasks/01-selinux.yml
+- include_tasks: tasks/05-crontab.yml
+- include_tasks: tasks/06-logrotate.yml
+- include_tasks: tasks/07-sysstat.yml
+- include_tasks: tasks/08-sysctl.yml
+- include_tasks: tasks/09-profile.yml
+- include_tasks: tasks/10-banner.yml
+- include_tasks: tasks/11-ssh.yml
+- include_tasks: tasks/12-lvm.yml
+- include_tasks: tasks/13-mount-dump.yml
+- include_tasks: tasks/14-kdump.yml
+- include_tasks: tasks/15-ntp.yml
+- include_tasks: tasks/16-ntpdate.yml
+- include_tasks: tasks/17-rsyslog.yml
+- include_tasks: tasks/18-irqbalance.yml
+- include_tasks: tasks/19-fstab.yml
+- include_tasks: tasks/20-rc.local.yml
+- include_tasks: tasks/21-coredump.yml
+- include_tasks: tasks/22-pam.yml
+- include_tasks: tasks/23-permission.yml
+- include_tasks: tasks/24-securetty.yml

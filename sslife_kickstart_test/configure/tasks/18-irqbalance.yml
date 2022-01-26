@@ -1,0 +1,7 @@
+- name: irqbalance oneshot (phy)
+  lineinfile:
+     path: /etc/sysconfig/irqbalance
+     regexp: '^IRQBALANCE_ONESHOT='
+     insertafter: '#IRQBALANCE_ONESHOT'
+     line: 'IRQBALANCE_ONESHOT=yes'
+  when: bool_phy == 'phy'

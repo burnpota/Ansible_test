@@ -1,0 +1,14 @@
+---
+# handlers file for configure
+
+- name: reconfiguration of grub
+  shell:
+     cmd: /usr/sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
+
+- name: yum clean all
+  shell:
+     cmd: /usr/bin/yum clean all; /usr/bin/yum repolist
+
+- name: reboot
+  reboot:
+     

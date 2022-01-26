@@ -1,0 +1,15 @@
+- name: banner set
+  block:
+     - copy:
+        src: files/banner
+        dest: /etc/motd
+
+     - copy:
+        src: files/banner
+        dest: /etc/issue
+
+     - copy:
+        src: files/banner
+        dest: /etc/issue.net
+
+

@@ -1,0 +1,12 @@
+- crond.service 
+- kdump
+- microcode
+- ntpd
+- ntpdate
+- rsyslog
+- smartd
+- sshd
+- sysstat
+- systemd-readahead-collect
+- systemd-readahead-drop
+- systemd-readahead-replxinetd

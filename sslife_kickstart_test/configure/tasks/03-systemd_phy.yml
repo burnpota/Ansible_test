@@ -1,0 +1,71 @@
+- name: systemd enable for phy
+  systemd:
+     name: "{{ item }}"
+     enabled: yes
+  with_items:
+     - crond
+     - kdump
+     - microcode
+     - ntpd
+     - ntpdate
+     - rsyslog
+     - smartd
+     - sshd
+     - sysstat
+     - systemd-readahead-collect
+     - systemd-readahead-drop
+     - systemd-readahead-replay
+     - xinetd
+     - irqbalance
+     - multipathd
+
+- name: systemd disable for phy
+  systemd:
+     name: accounts-daemon
+     enabled: no
+
+- name: systemd masked for phy
+  systemd:
+     name: "{{ item }}"
+     masked: yes
+  with_items:
+     - alsa-restore
+     - alsa-state
+     - alsa-store
+     - abrt-ccpp
+     - abrt-oops
+     - abrt-vmcore
+     - abrt-xorg
+     - abrtd
+     - atd
+     - auditd
+     - avahi-daemon
+     - bluetooth
+     - chronyd
+     - dmraid-activation
+     - firewalld
+     - gdm
+     - hypervkvpd
+     - hypervvssd
+     - iscsi
+     - initial-setup-graphical
+     - initial-setup-text
+     - ksm
+     - ksmtuned
+     - libstoragemgmt
+     - libvirtd
+     - mdmonitor
+     - ModemManager
+     - netcf-transaction
+     - NetworkManager-dispatcher
+     - NetworkManager
+     - NetworkManager-wait-online
+     - packagekit-offline-update
+     - postfix
+     - rhsmcertd
+     - rngd
+     - rtkit-daemon
+     - spice-vdagentd
+     - tuned
+     - ctrl-alt-del.target
+     - tmp.mount

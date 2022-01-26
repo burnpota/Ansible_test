@@ -1,0 +1,27 @@
+- name: ntpdate
+  block:
+
+     - template:
+          src: templates/step-tickers.j2
+          dest: /etc/ntp/step-tickers
+     
+     - lineinfile:
+          path: /etc/sysconfig/ntpdate
+          regexp: '^OPTIONS='
+          line: 'OPTIONS="-p 2 -4"'
+
+     - lineinfile:
+          path: /etc/sysconfig/ntpdate
+          regexp: '^SYNC_HWCLOCK='
+          line: 'SYNC_HWCLOCK=yes'
+
+     - blockinfile:
+          path: /etc/sysconfig/ntpdate
+          marker: "{mark}"
+          marker_begin: " "
+          marker_end: "   "
+          insertafter: '^OPTIONS='
+          block: |
+             # Number of retries before giving up
+             RETRIES=2
+

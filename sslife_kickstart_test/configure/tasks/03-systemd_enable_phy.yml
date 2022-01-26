@@ -1,0 +1,20 @@
+- name: systemd enable for phy
+  systemd:
+     name: "{{ item }}"
+     enabled: yes
+  with_times:
+     - crond
+     - kdump
+     - microcode
+     - ntpd
+     - ntpdate
+     - rsyslog
+     - smartd
+     - sshd
+     - sysstat
+     - systemd-readahead-collect
+     - systemd-readahead-drop
+     - systemd-readahead-replay
+     - xinetd
+     - irqbalance
+     - multipathd

@@ -1,0 +1,13 @@
+- name: cmdline for vm
+  lineinfile:
+     path: /etc/default/grub
+     regexp: '^GRUB_CMDLINE_LINUX='
+     line: 'GRUB_CMDLINE_LINUX="nmi_watchdog=0 transparent_hugepage=never elevator=noop rdblacklist=vmw_vsock_vmci_transport,vsock,vmw_vmci crashkernel={{ kdump_mem }} ipv6.disable=1 mce=ignore_ce"'
+  notify:
+     - reconfiguration of grub
+
+- name: make blacklist.conf
+  copy:
+     src: files/blacklist.conf
+     dest: /etc/modprobe.d/blacklist.conf
+     mode: 0644

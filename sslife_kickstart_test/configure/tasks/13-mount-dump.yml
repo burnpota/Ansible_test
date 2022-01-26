@@ -1,0 +1,12 @@
+- name: mount /CRASH
+  block:
+  
+     - file:
+          name: /CRASH/
+          path: /
+          state: directory
+
+     - lineinfile:
+          path: /etc/fstab
+          regexp: '^/dev/mapper/vg9-CRASH'
+          line: '/dev/mapper/vg9-CRASH    /CRASH    xfs    defaults    0 2'

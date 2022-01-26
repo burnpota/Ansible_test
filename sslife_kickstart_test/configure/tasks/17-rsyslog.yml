@@ -1,0 +1,36 @@
+- name: rsyslog conf
+  block:
+     
+     - lineinfile:
+          path: /etc/rsyslog.conf
+          regexp: '^kern'
+          insertafter: '^#kern'
+          line: 'kern.*                                                  /var/log/kernel'
+
+     - lineinfile:
+          path: /etc/rsyslog.conf
+          regexp: '/var/log/messages$'
+          line: '*.info;mail.none;authpriv.none;cron.none;*.crit;daemon.*;*.notice;*.debug;*.err;*.alert   /var/log/messages'
+
+- name: syslog
+  block:
+
+     - lineinfile:
+          path: /etc/logrotate.d/syslog
+          regexp: '/var/log/kernel'
+          insertafter: '/var/log/secure'
+          line: '/var/log/kernel'
+     
+     - lineinfile:
+          path: /etc/logrotate.d/syslog
+          regexp: '/var/log/vmtoolsd.log'
+          insertafter: '/var/log/kernel'
+          line: '/var/log/vmtoolsd.log'
+       when: bool_phy == 'vm'
+
+- name: logging level
+  lineinfile:
+     path: /etc/systemd/system.conf
+     regexp: '^LogLevel='
+     insertafter: '^#LogLevel'
+     line: 'LogLevel=notice'

@@ -1,0 +1,5 @@
+- name: selinux disable
+  selinux:
+     policy: targeted
+     state: disabled
+  notify: reboot

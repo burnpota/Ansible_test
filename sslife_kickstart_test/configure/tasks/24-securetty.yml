@@ -1,0 +1,5 @@
+- name: securetty
+  copy:
+     src: files/securetty
+     dest: /etc/securetty
+     

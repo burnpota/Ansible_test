@@ -1,0 +1,10 @@
+- name: limits.d/core.conf
+  blockinfile:
+     path: /etc/security/limits.d/core.conf
+     marker: '{mark}'
+     marker_begin: "  "
+     marker_end: "   "
+     block: |
+        *  soft    core    unlimited
+        *  hard    core    unlimited
+     create: yes

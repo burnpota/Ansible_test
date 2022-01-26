@@ -1,0 +1,34 @@
+- name: permission
+  block:
+
+     - file:
+          path: "{{ item }}"
+          mode: 0600
+          state: touch
+       with_items:
+          - /etc/skel/.bash_logout
+          - /etc/skel/.bash_profile
+          - /etc/skel/.bash_history
+          - /etc/skel/.bashrc
+          - /etc/skel/.kshrc
+          - /etc/cron.deny
+          - /etc/passwd-
+
+     - file:
+          path: "{{ item }}"
+          mode: 0000
+          state: touch
+       with_items:
+         - /etc/skel/.rhosts
+         - /etc/ftpusers
+
+     - file:
+          path: "{{ item }}"
+          mode: 0700
+          state: touch
+       with_items:
+         - /usr/bin/last
+         - /usr/sbin/ifconfig
+
+
+   

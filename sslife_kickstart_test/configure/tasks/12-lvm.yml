@@ -1,0 +1,45 @@
+- name: vg9 setting
+  block:
+
+     - shell:
+          cmd: /usr/sbin/fdisk -l /dev/sda | /usr/bin/tail -1 | awk '{print $3}'
+       register: last_partition_end
+
+     - parted:
+          device: /dev/sda
+          number: "{{ ansible_devices.sda.partitions|count+1 }}"
+          flags: "lvm"
+          part_type: logical
+          part_start: "{{ last_partition_end.stdout|int+50 }}s"
+          part_end: "{{ last_partition_end.stdout|int+50+ansible_memtotal_mb*4096+2157152 }}s"
+          unit: s
+          state: present
+       when: '"vg9" not in ansible_lvm.vgs'
+
+     - shell:
+          cmd: /usr/sbin/fdisk -l /dev/sda | /usr/bin/tail -1 | awk '{print $1}'
+       register: pv_partition_path
+     
+     - lvg:
+          pvs: "{{ pv_partition_path.stdout }}"
+          vg: vg9
+          state: present
+
+     - lvol:
+          vg: vg9
+          size: "{{ ansible_memtotal_mb }}M"
+          lv: CRASH
+          state: present
+          shrink: no
+
+     - lvol:
+          vg: vg9
+          size: "{{ ansible_memtotal_mb+1024 }}M"
+          lv: DUMP
+          state: present
+          shrink: no
+
+     - filesystem:
+          dev: /dev/mapper/vg9-CRASH
+          fstype: xfs
+

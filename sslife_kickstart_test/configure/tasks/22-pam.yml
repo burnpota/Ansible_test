@@ -1,0 +1,45 @@
+- name: pam.d config
+  block:
+
+     - pamd:
+          name: su
+          type: auth
+          control: sufficient
+          module_path: pam_rootok.so
+          module_arguments: debug
+
+     - pamd:
+          name: system-auth
+          type: auth
+          control: required
+          module_path: pam_faildelay.so
+          new_module_path: pam_tally2.so
+          module_arguments: deny=4 unlock_time=1800
+
+     - pamd:
+          name: system-auth
+          type: account
+          control: required
+          module_path: pam_unix.so
+          new_type: account
+          new_control: required
+          new_module_path: pam_tally2.so
+          state: before
+
+     - pamd:
+          name: password-auth
+          type: auth
+          control: required
+          module_path: pam_faildelay.so
+          new_module_path: pam_tally2.so
+          module_arguments: deny=4 unlock_time=1800
+
+     - pamd:
+          name: password-auth
+          type: account
+          control: required
+          module_path: pam_unix.so
+          new_type: account
+          new_control: required
+          new_module_path: pam_tally2.so
+          state: before

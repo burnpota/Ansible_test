@@ -1,0 +1,24 @@
+---
+# vars file for configure
+
+ansible_password: imsi00
+sys_vendor: "{{ 'vm' if ansible_system_vendor == 'VMware, Inc.'
+                else 'dell' if ansible_system_vendor == 'Dell'
+                else 'hp' }}"
+bool_phy: "{{ 'vm' if sys_vendor == 'vm'
+                else 'phy' }}"
+kdump_mem: "{{ '512M' if ansible_memtotal_mb >= 102400
+                else '256M' }}"
+
+NTP_server:
+   
+   operation:
+      1: PNTPNL01SL
+      2: PNTPNL02SL
+
+   dr:
+      1: DNTPML01SL
+      2: DNTPML02SL
+
+
+

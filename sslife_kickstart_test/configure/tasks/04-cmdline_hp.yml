@@ -1,0 +1,17 @@
+- name: cmdline for hp gen10
+  lineinfile:
+     path: /etc/default/grub
+     regexp: '^GRUB_CMDLINE_LINUX='
+     line: 'GRUB_CMDLINE_LINUX="nmi_watchdog=0 transparent_hugepage=never elevator=deadline rdloaddriver=smartpqi rdloaddriver=qla2xxx crashkernel={{ kdump_mem }} ipv6.disable=1 mce=ignore_ce intel_idle.max_cstate=0 processor.max_cstate=1 intel_pstate=disable nosoftlockup"'
+  notify:
+     - reconfiguration of grub
+  when: ansible_product_name|last == 0
+
+- name: cmdline for hp gen9
+  lineinfile:
+     path: /etc/default/grub
+     regexp: '^GRUB_CMDLINE_LINUX='
+     line: 'GRUB_CMDLINE_LINUX="nmi_watchdog=0 transparent_hugepage=never elevator=deadline rdloaddriver=hpsa rdloaddriver=qla2xxx crashkernel={{ kdump_mem }} ipv6.disable=1 mce=ignore_ce intel_idle.max_cstate=0 processor.max_cstate=1 intel_pstate=disable nosoftlockup"'
+  notify:
+     - reconfiguration of grub
+  when: ansible_product_name|last != 0

@@ -1,0 +1,5 @@
+- name: logrotate config
+  copy:
+     src: files/logrotate.conf
+     dest: /etc/logrotate.conf
+     mode: 0644

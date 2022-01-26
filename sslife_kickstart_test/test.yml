@@ -1,0 +1,7 @@
+---
+- name: test
+  hosts: testserver
+  tasks:
+     
+     - debug:
+        msg: "{{ ansible_memtotal_mb*2/1024+1|float }}"
