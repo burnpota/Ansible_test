@@ -13,12 +13,12 @@ kdump_mem: "{{ '512M' if ansible_memtotal_mb >= 102400
 NTP_server:
    
    operation:
-      1: PNTPNL01SL
-      2: PNTPNL02SL
+      1: PXXXXX01
+      2: PXXXXX02
 
    dr:
-      1: DNTPML01SL
-      2: DNTPML02SL
+      1: DXXXXX01
+      2: DXXXXX02
 
 
 
